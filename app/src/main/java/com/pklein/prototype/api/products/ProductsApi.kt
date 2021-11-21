@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ProductsApi {
     @GET("products/search")
-    suspend fun search(): Response<SearchResult>
+    suspend fun search(@Query("keyword") keyword: String): Response<SearchResult>
 
     @GET("products/details")
     suspend fun getDetails(@Query("id") id: Long): Response<ProductDetails>

@@ -43,7 +43,12 @@ class DetailActivity : ComponentActivity() {
                                             this.finish()
                                         }
                                     ) {
-                                        Icon(Icons.Filled.ArrowBack, contentDescription = "")
+                                        Icon(
+                                            Icons.Filled.ArrowBack,
+                                            contentDescription = stringResource(
+                                                id = R.string.icon_back
+                                            )
+                                        )
                                     }
                                 },
                                 elevation = AppBarDefaults.TopAppBarElevation

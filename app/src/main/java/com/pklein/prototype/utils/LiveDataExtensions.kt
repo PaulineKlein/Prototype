@@ -12,15 +12,8 @@ fun <T> LiveData<T>.bind(owner: LifecycleOwner, onObserved: (T) -> Unit) {
 fun <S, T> LiveData<S>.map(mapFunction: (S) -> T): LiveData<T> =
     Transformations.map(this, mapFunction)
 
-inline fun <T> LiveData<T>.filter(crossinline predicate: (T?) -> Boolean): LiveData<T> {
-    val mutableLiveData: MediatorLiveData<T> = MediatorLiveData()
-    mutableLiveData.addSource(this) {
-        if (predicate(it))
-            mutableLiveData.value = it
-    }
-    return mutableLiveData
-}
-
+// usefull when we need to recompose the view when the elements change
+// (here the search gives always the same result, therefore we can't use it)
 fun <T> LiveData<T>.distinctUntilChanged(): LiveData<T> {
     val mutableLiveData: MediatorLiveData<T> = MediatorLiveData()
     var latestValue: T? = null

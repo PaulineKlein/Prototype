@@ -12,9 +12,10 @@ interface Products {
     /**
      * Retourne le résultat d’une recherche Rakuten, les 20 premiers résultats sur le keyword samsung
      *
+     * @param keyword String de la recherche
      * @return une liste de Produits : List<[Product]> ou NUll si erreur
      */
-    suspend fun search(): List<Product>?
+    suspend fun search(keyword: String): List<Product>?
 
     /**
      * Retourne le résultat de la recherche d’un détail produit

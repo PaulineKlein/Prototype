@@ -3,8 +3,15 @@ package com.pklein.prototype.presentation.home
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat.startActivity
@@ -16,12 +23,20 @@ import com.pklein.prototype.model.details.ProductDetails
 import com.pklein.prototype.presentation.LoadingScreen
 import com.pklein.prototype.presentation.details.DetailActivity
 import com.pklein.prototype.presentation.home.view.HomeContent
+import com.pklein.prototype.presentation.home.view.SearchBar
 import com.pklein.prototype.ui.theme.PrototypeTheme
 import com.pklein.prototype.utils.bind
-import com.pklein.prototype.utils.distinctUntilChanged
 import com.pklein.prototype.utils.map
 
+class IsLoadingState(isLoading: Boolean) {
+    var isLoading by mutableStateOf(isLoading)
+}
+
+// global variable to let compose known when it should display loadable view
+val isLoadingState = IsLoadingState(false)
+
 @ExperimentalCoilApi
+@ExperimentalComposeUiApi
 class HomeActivity : ComponentActivity() {
 
     private val homeViewModel: HomeViewModel by lazy {
@@ -30,14 +45,12 @@ class HomeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showLoader()
-        homeViewModel.handle(HomeAction.Search)
+        showProducts(null)
         handleViewModelChanges()
     }
 
     private fun handleViewModelChanges() {
         homeViewModel.state.map { it.productsToShow }
-            .distinctUntilChanged()
             .bind(this, this::showProducts)
         homeViewModel.state.map { it.detailsToShow }
             .bind(this, this::showDetails)
@@ -47,8 +60,12 @@ class HomeActivity : ComponentActivity() {
         setContent {
             PrototypeTheme {
                 // A surface container using the 'background' color from the theme
+                isLoadingState.isLoading = false
                 Surface(color = MaterialTheme.colors.background) {
-                    DisplayHome(products = listProduct, isLoading = false) {
+                    DisplayHome(
+                        products = listProduct,
+                        homeViewModel = homeViewModel
+                    ) {
                         homeViewModel.handle(HomeAction.GetDetails(it.id))
                     }
                 }
@@ -58,51 +75,44 @@ class HomeActivity : ComponentActivity() {
 
     private fun showDetails(productDetails: ProductDetails?) {
         if (productDetails != null) {
+            homeViewModel.handle(HomeAction.ResetDetails)
             startActivity(this, DetailActivity.newIntent(this, productDetails), null)
-        } else {
-            // todo show popup
-        }
-    }
-
-    private fun showLoader() {
-        setContent {
-            PrototypeTheme {
-                Surface(color = MaterialTheme.colors.background) {
-                    DisplayHome(isLoading = true) {
-                        // do nothing when loading
-                    }
-                }
-            }
         }
     }
 }
 
-
+@ExperimentalComposeUiApi
 @ExperimentalCoilApi
 @Composable
 fun DisplayHome(
     products: List<Product>? = null,
-    isLoading: Boolean,
+    homeViewModel: HomeViewModel,
     navigateToDetail: (Product) -> Unit,
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(text = stringResource(R.string.app_name))
-                },
+                title = { Text(text = stringResource(R.string.app_name)) },
                 elevation = AppBarDefaults.TopAppBarElevation
             )
         },
         content = {
-            LoadingScreen(isLoading = isLoading) {
-                HomeContent(products, navigateToDetail)
+            Column(modifier = Modifier.fillMaxSize()) {
+                SearchBar(hint = stringResource(R.string.home_search_hint)) {
+                    isLoadingState.isLoading = true
+                    homeViewModel.handle(HomeAction.Search(it))
+                }
+                LoadingScreen(isLoading = isLoadingState.isLoading) {
+                    HomeContent(products, navigateToDetail)
+                }
             }
         }
     )
 }
 
 
+@ExperimentalComposeUiApi
 @ExperimentalCoilApi
 @Preview(showBackground = true)
 @Composable
@@ -120,7 +130,7 @@ fun DefaultPreview() {
             )
         )
     PrototypeTheme {
-        DisplayHome(lisProduct, false) {
+        DisplayHome(lisProduct, homeViewModel = HomeViewModel()) {
             // do nothing on default preview
         }
     }

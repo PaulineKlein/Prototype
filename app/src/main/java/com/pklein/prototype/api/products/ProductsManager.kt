@@ -11,10 +11,10 @@ class ProductsManager : Products, BaseManager() {
 
     private val productsApi = ApiClient.apiService
 
-    override suspend fun search(): List<Product>? {
+    override suspend fun search(keyword: String): List<Product>? {
         return try {
             val apiResponse = withContext(Dispatchers.IO) {
-                productsApi.search()
+                productsApi.search(keyword)
             }
             if (apiResponse.isSuccessful) {
                 val result = apiResponse.body()

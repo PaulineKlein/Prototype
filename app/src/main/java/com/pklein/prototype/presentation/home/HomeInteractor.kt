@@ -6,8 +6,8 @@ import com.pklein.prototype.model.details.ProductDetails
 
 class HomeInteractor(private val productsManager: ProductsManager = ProductsManager()) {
 
-    suspend fun search(): List<Product>? {
-        return productsManager.search()
+    suspend fun search(keyword: String): List<Product>? {
+        return productsManager.search(keyword)
     }
 
     suspend fun getDetails(id: Long): ProductDetails? {

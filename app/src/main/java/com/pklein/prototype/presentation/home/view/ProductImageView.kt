@@ -33,7 +33,7 @@ fun ProductImage(data: String?, size: Dp = dimensionResource(id = R.dimen.small_
             contentDescription = stringResource(R.string.product_image),
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimensionResource(id = R.dimen.padding_8))
                 .size(size)
         )
     } else {
@@ -42,7 +42,7 @@ fun ProductImage(data: String?, size: Dp = dimensionResource(id = R.dimen.small_
             contentDescription = stringResource(R.string.product_image_error),
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimensionResource(id = R.dimen.padding_8))
                 .size(size)
                 .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
         )

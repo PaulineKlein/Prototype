@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import coil.annotation.ExperimentalCoilApi
@@ -52,7 +51,7 @@ private fun DetailHeader(
 @Composable
 private fun DetailBody(productDetails: ProductDetails) {
     Column {
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_8)))
 
         ProductName(productDetails.headline)
         ProductDescription(productDetails.description)
@@ -72,7 +71,7 @@ private fun DetailBody(productDetails: ProductDetails) {
 private fun ProductName(
     name: String
 ) {
-    val padding = dimensionResource(id = R.dimen.small_padding)
+    val padding = dimensionResource(id = R.dimen.padding_16)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         Text(
             text = name,
@@ -86,7 +85,7 @@ private fun ProductName(
 private fun ProductDescription(
     description: String
 ) {
-    val padding = dimensionResource(id = R.dimen.small_padding)
+    val padding = dimensionResource(id = R.dimen.padding_16)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         AndroidView(
             factory = { context -> TextView(context) },
@@ -99,7 +98,7 @@ private fun ProductDescription(
 
 @Composable
 private fun ProductProperty(label: String, value: String) {
-    val padding = dimensionResource(id = R.dimen.small_padding)
+    val padding = dimensionResource(id = R.dimen.padding_16)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         Divider()
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {

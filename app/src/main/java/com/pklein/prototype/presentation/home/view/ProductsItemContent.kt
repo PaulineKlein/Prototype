@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,9 +26,12 @@ import com.pklein.prototype.model.Product
 fun ProductsItemContent(product: Product, navigateToDetail: (Product) -> Unit) {
     Card(
         modifier = Modifier
-            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.padding_8),
+                vertical = dimensionResource(id = R.dimen.padding_8)
+            )
             .fillMaxWidth(),
-        elevation = 2.dp,
+        elevation = dimensionResource(id = R.dimen.elevation_2),
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
         Row(
@@ -37,7 +41,7 @@ fun ProductsItemContent(product: Product, navigateToDetail: (Product) -> Unit) {
             ProductImage(product.imagesUrls[0])
             Column(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(dimensionResource(id = R.dimen.padding_16))
                     .fillMaxWidth()
                     .align(Alignment.CenterVertically)
             ) {

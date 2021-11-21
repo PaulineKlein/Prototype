@@ -14,7 +14,8 @@ data class HomeState(
 ) : State
 
 sealed class HomeAction : Action {
-    object Search : HomeAction()
+    object ResetDetails : HomeAction()
+    data class Search(val keyword: String) : HomeAction()
     data class GetDetails(val productId: Long) : HomeAction()
 }
 
@@ -27,14 +28,24 @@ class HomeViewModel(
 
     override fun handle(action: HomeAction) {
         when (action) {
-            is HomeAction.Search -> search()
+            is HomeAction.ResetDetails -> resetDetails()
+            is HomeAction.Search -> search(action.keyword)
             is HomeAction.GetDetails -> getDetails(action.productId)
         }
     }
 
-    private fun search() {
+    private fun resetDetails() {
+        // clean details
+        updateState {
+            it.copy(
+                detailsToShow = null
+            )
+        }
+    }
+
+    private fun search(keyword: String) {
         viewModelScope.launch {
-            productList = homeInteractor.search()
+            productList = homeInteractor.search(keyword)
             updateState {
                 it.copy(
                     productsToShow = productList

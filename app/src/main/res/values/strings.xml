@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Prototype</string>
+    <string name="home_search_hint">Rechercher ...</string>
     <string name="product_image">Product image</string>
     <string name="product_image_error">Image not loaded</string>
     <string name="product_detail_title">Produit %s</string>
     <string name="product_detail_new_price">Meilleur prix neuf</string>
     <string name="product_detail_used_price">Meilleur prix d’occasion</string>
     <string name="unknown_error">"Un problème est survenu"</string>
+    <string name="icon_search">"Icone Recherche"</string>
+    <string name="icon_back">"Icone Retour"</string>
     <string name="amount_euro">%s €</string>
 
 </resources>
