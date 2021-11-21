@@ -89,7 +89,6 @@ fun DisplayHome(
     homeViewModel: HomeViewModel,
     navigateToDetail: (Product) -> Unit,
 ) {
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -110,7 +109,6 @@ fun DisplayHome(
         }
     )
 }
-
 
 @ExperimentalComposeUiApi
 @ExperimentalCoilApi

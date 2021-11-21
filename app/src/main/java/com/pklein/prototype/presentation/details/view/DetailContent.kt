@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -30,6 +31,7 @@ fun DetailContent(productDetails: ProductDetails) {
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(scrollState),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     DetailHeader(productDetails)
                     DetailBody(productDetails)
@@ -46,6 +48,7 @@ private fun DetailHeader(
 ) {
     val imageUrl = productDetails.images[0].imagesUrls.entry[0].url
     ProductImage(imageUrl, dimensionResource(id = R.dimen.big_image))
+    // could be improve by transforming image into carousel of images
 }
 
 @Composable

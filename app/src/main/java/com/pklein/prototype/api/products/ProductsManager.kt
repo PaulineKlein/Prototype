@@ -20,10 +20,10 @@ class ProductsManager : Products, BaseManager() {
                 val result = apiResponse.body()
                 result?.products
             } else {
-                null // todo manage errors
+                null // in order to manage errors, it could be improve by using Either
             }
         } catch (th: Throwable) {
-            null // todo manage errors
+            null // in order to manage errors, it could be improve by using Either
         }
     }
 
@@ -35,10 +35,10 @@ class ProductsManager : Products, BaseManager() {
             if (apiResponse.isSuccessful) {
                 apiResponse.body()
             } else {
-                null // todo manage errors
+                null // in order to manage errors, it could be improve by using Either
             }
         } catch (th: Throwable) {
-            null // todo manage errors
+            null // in order to manage errors, it could be improve by using Either
         }
     }
 }
