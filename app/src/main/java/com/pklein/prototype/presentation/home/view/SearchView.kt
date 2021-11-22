@@ -37,7 +37,7 @@ fun SearchBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_16))
+            .padding(dimensionResource(id = R.dimen.medium_padding))
     ) {
         BasicTextField(
             value = text,
@@ -53,11 +53,11 @@ fun SearchBar(
             textStyle = TextStyle(color = Color.Black),
             modifier = Modifier
                 .fillMaxWidth()
-                .shadow(dimensionResource(id = R.dimen.elevation_2), RoundedCornerShape(30))
+                .shadow(dimensionResource(id = R.dimen.small_elevation), RoundedCornerShape(30))
                 .background(Color.White, RoundedCornerShape(30))
                 .padding(
-                    horizontal = dimensionResource(id = R.dimen.padding_16),
-                    vertical = dimensionResource(id = R.dimen.padding_16)
+                    horizontal = dimensionResource(id = R.dimen.medium_padding),
+                    vertical = dimensionResource(id = R.dimen.medium_padding)
                 )
                 .onFocusChanged {
                     isHintDisplayed = !it.isFocused
@@ -68,7 +68,10 @@ fun SearchBar(
                 text = hint,
                 color = Color.LightGray,
                 modifier = Modifier
-                    .padding(horizontal = 20.dp, vertical = 12.dp)
+                    .padding(
+                        horizontal = dimensionResource(id = R.dimen.medium_padding),
+                        vertical = dimensionResource(id = R.dimen.medium_padding)
+                    )
             )
         }
     }

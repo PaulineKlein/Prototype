@@ -66,6 +66,7 @@ class HomeActivity : ComponentActivity() {
                         products = listProduct,
                         homeViewModel = homeViewModel
                     ) {
+                        // could be improve by adding an other loader somewhere while calling API :
                         homeViewModel.handle(HomeAction.GetDetails(it.id))
                     }
                 }

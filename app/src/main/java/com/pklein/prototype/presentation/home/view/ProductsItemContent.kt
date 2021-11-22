@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.pklein.prototype.R
 import com.pklein.prototype.model.Product
@@ -27,12 +26,12 @@ fun ProductsItemContent(product: Product, navigateToDetail: (Product) -> Unit) {
     Card(
         modifier = Modifier
             .padding(
-                horizontal = dimensionResource(id = R.dimen.padding_8),
-                vertical = dimensionResource(id = R.dimen.padding_8)
+                horizontal = dimensionResource(id = R.dimen.small_padding),
+                vertical = dimensionResource(id = R.dimen.small_padding)
             )
             .fillMaxWidth(),
-        elevation = dimensionResource(id = R.dimen.elevation_2),
-        shape = RoundedCornerShape(corner = CornerSize(16.dp))
+        elevation = dimensionResource(id = R.dimen.small_elevation),
+        shape = RoundedCornerShape(corner = CornerSize(dimensionResource(id = R.dimen.medium_corner)))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -41,7 +40,7 @@ fun ProductsItemContent(product: Product, navigateToDetail: (Product) -> Unit) {
             ProductImage(product.imagesUrls[0])
             Column(
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_16))
+                    .padding(dimensionResource(id = R.dimen.medium_padding))
                     .fillMaxWidth()
                     .align(Alignment.CenterVertically)
             ) {

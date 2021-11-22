@@ -17,7 +17,7 @@ import com.pklein.prototype.ui.theme.PrototypeTheme
 
 class DetailActivity : ComponentActivity() {
     private val productDetails: ProductDetails by lazy {
-        intent?.getSerializableExtra(PRODUCT_ID) as ProductDetails
+        intent?.getSerializableExtra(PRODUCT_DETAILS) as ProductDetails
     }
 
     @ExperimentalCoilApi
@@ -64,10 +64,10 @@ class DetailActivity : ComponentActivity() {
     }
 
     companion object {
-        private const val PRODUCT_ID = "product_id"
+        private const val PRODUCT_DETAILS = "product_details"
         fun newIntent(context: Context, productDetails: ProductDetails) =
             Intent(context, DetailActivity::class.java).apply {
-                putExtra(PRODUCT_ID, productDetails)
+                putExtra(PRODUCT_DETAILS, productDetails)
             }
     }
 }

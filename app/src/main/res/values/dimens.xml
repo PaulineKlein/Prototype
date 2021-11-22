@@ -2,7 +2,8 @@
 <resources>
     <dimen name="small_image">84dp</dimen>
     <dimen name="big_image">150dp</dimen>
-    <dimen name="padding_8">8dp</dimen>
-    <dimen name="padding_16">16dp</dimen>
-    <dimen name="elevation_2">2dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="small_elevation">2dp</dimen>
+    <dimen name="medium_corner">16dp</dimen>
 </resources>

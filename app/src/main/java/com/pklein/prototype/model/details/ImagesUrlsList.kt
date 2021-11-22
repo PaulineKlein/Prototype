@@ -9,7 +9,6 @@ import java.io.Serializable
  */
 @JsonClass(generateAdapter = true)
 data class ImagesUrlsList(
-
     /**
      * liste des ImagesUrls
      */

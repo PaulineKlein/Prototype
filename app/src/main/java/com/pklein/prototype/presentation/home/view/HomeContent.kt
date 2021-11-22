@@ -28,8 +28,8 @@ fun HomeContent(products: List<Product>?, navigateToDetail: (Product) -> Unit) {
         // LazyColumn is equivalent of RecyclerView
         LazyColumn(
             contentPadding = PaddingValues(
-                horizontal = dimensionResource(id = R.dimen.padding_16),
-                vertical = dimensionResource(id = R.dimen.padding_8)
+                horizontal = dimensionResource(id = R.dimen.medium_padding),
+                vertical = dimensionResource(id = R.dimen.small_padding)
             )
         ) {
             items(
@@ -50,9 +50,9 @@ fun HomeContent(products: List<Product>?, navigateToDetail: (Product) -> Unit) {
                 contentDescription = stringResource(R.string.product_image_error),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_8))
+                    .padding(dimensionResource(id = R.dimen.small_padding))
                     .size(dimensionResource(id = R.dimen.big_image))
-                    .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
+                    .clip(RoundedCornerShape(corner = CornerSize(dimensionResource(id = R.dimen.medium_corner))))
             )
         }
     }

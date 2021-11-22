@@ -54,8 +54,7 @@ private fun DetailHeader(
 @Composable
 private fun DetailBody(productDetails: ProductDetails) {
     Column {
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_8)))
-
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_padding)))
         ProductName(productDetails.headline)
         ProductDescription(productDetails.description)
 
@@ -74,7 +73,7 @@ private fun DetailBody(productDetails: ProductDetails) {
 private fun ProductName(
     name: String
 ) {
-    val padding = dimensionResource(id = R.dimen.padding_16)
+    val padding = dimensionResource(id = R.dimen.medium_padding)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         Text(
             text = name,
@@ -88,11 +87,12 @@ private fun ProductName(
 private fun ProductDescription(
     description: String
 ) {
-    val padding = dimensionResource(id = R.dimen.padding_16)
+    val padding = dimensionResource(id = R.dimen.medium_padding)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         AndroidView(
             factory = { context -> TextView(context) },
             update = {
+                // could be improve by authorizing click on HTML link :
                 it.text = HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
             }
         )
@@ -101,7 +101,7 @@ private fun ProductDescription(
 
 @Composable
 private fun ProductProperty(label: String, value: String) {
-    val padding = dimensionResource(id = R.dimen.padding_16)
+    val padding = dimensionResource(id = R.dimen.medium_padding)
     Column(modifier = Modifier.padding(start = padding, end = padding, bottom = padding)) {
         Divider()
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {

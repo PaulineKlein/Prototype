@@ -8,7 +8,6 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class Product(
-
     /**
      * ID du produit à utiliser dans le ws de détails
      */
